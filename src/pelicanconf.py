@@ -34,3 +34,4 @@ PLUGIN_PATHS = ['plugins']
 PLUGINS = ["render_math"]
 
 THEME = "themes/pelican-blue"
+MENUITEMS = (('Home', '/'),)

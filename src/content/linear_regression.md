@@ -34,7 +34,7 @@ print y
 
 很容易看出来，这个模型可以用 $y=2*x$ 来表示。
 
-放入sklearn的LinearRegression中fit, 然后对X进行predict
+使用sklearn的 LinearRegression 进行fit和predict
 ```python
 reg = LinearRegression().fit(X, y)
 reg.predict(X)
@@ -65,7 +65,7 @@ $y=w_0*x_0 + w_1*x_1 + ... + w_n*x_n + b$
 
 例如上面的 $y=2*x$ 就是一个单自变量的线性模型，多变量的线性模型例如$y=2*x_0 + 3*x_1 + 4$  
 
-因此，模型的核心问题，在于如何确定$(w_0, w_1, ... w_n)$ 的值，让y的误差最小。
+因此，模型的核心问题，在于如何确定$(w_0, w_1, ... w_n, b)$ 的值，让y的误差最小。
 
 较为通用的，一般是**最小二乘法**
 
@@ -73,7 +73,7 @@ $y=w_0*x_0 + w_1*x_1 + ... + w_n*x_n + b$
 
 
 
-参考 
+参考：
 
-1. https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression
-2. https://zh.wikipedia.org/wiki/%E7%B7%9A%E6%80%A7%E5%9B%9E%E6%AD%B8
+1. [sklearn.linear_model.LinearRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html){:target="_blank"}
+2. [wikipedia-线性回归](https://zh.wikipedia.org/wiki/%E7%B7%9A%E6%80%A7%E5%9B%9E%E6%AD%B8){:target="_blank"}

@@ -92,7 +92,7 @@
 
 
 <p>很容易看出来，这个模型可以用 <span class="math">\(y=2*x\)</span> 来表示。</p>
-<p>放入sklearn的LinearRegression中fit, 然后对X进行predict</p>
+<p>使用sklearn的 LinearRegression 进行fit和predict</p>
 <div class="highlight"><pre><span></span><span class="n">reg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 </pre></div>
@@ -117,13 +117,13 @@
 <p>线性回归的思路很简单，通过构造一个线性函数，来预测目标的值</p>
 <p><span class="math">\(y=w_0*x_0 + w_1*x_1 + ... + w_n*x_n + b\)</span></p>
 <p>例如上面的 <span class="math">\(y=2*x\)</span> 就是一个单自变量的线性模型，多变量的线性模型例如<span class="math">\(y=2*x_0 + 3*x_1 + 4\)</span>  </p>
-<p>因此，模型的核心问题，在于如何确定<span class="math">\((w_0, w_1, ... w_n)\)</span> 的值，让y的误差最小。</p>
+<p>因此，模型的核心问题，在于如何确定<span class="math">\((w_0, w_1, ... w_n, b)\)</span> 的值，让y的误差最小。</p>
 <p>较为通用的，一般是<strong>最小二乘法</strong></p>
 <h1>三、最小二乘法</h1>
 <p>参考 </p>
 <ol>
-<li>https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression</li>
-<li>https://zh.wikipedia.org/wiki/%E7%B7%9A%E6%80%A7%E5%9B%9E%E6%AD%B8</li>
+<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html" target="_blank">sklearn.linear_model.LinearRegression</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/%E7%B7%9A%E6%80%A7%E5%9B%9E%E6%AD%B8" target="_blank">wikipedia-线性回归</a></li>
 </ol>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var align = "center",

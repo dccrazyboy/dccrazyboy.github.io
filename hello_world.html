@@ -61,7 +61,7 @@
   <article>
 <section id="content">
     <article>
-        <h2 class="post_title post_detail"><a href="/hello-world.html" rel="bookmark" title="Permalink to Hello World">Hello World</a></h2>
+        <h2 class="post_title post_detail"><a href="/hello_world.html" rel="bookmark" title="Permalink to Hello World">Hello World</a></h2>
         <div class="entry-content blog-post">
             <p>Hello World!!!</p>
 <p><span class="math">\(x^2\)</span></p>
@@ -136,6 +136,20 @@
             <div><span>Tags : </span>
             </div>
         </div>
+        <div class="comments">
+            <h2>Comments !</h2>
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+            var disqus_identifier = "hello_world.html";
+            (function() {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = 'https://dongchao.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] ||
+                 document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+            </script>
+        </div>
     </article>
 </section>
   </article>
@@ -149,6 +163,15 @@
     </p>
   </footer>
 
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-38402381-7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-38402381-7');
+  </script>
 
 </body>
 </html>

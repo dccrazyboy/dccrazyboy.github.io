@@ -36,4 +36,4 @@ PLUGINS = ["render_math"]
 THEME = "themes/pelican-blue"
 MENUITEMS = (('Home', '/'),)
 GOOGLE_ANALYTICS = "UA-38402381-7"
-DISQUS_SITENAME = "dongchao"
+# DISQUS_SITENAME = "dongchao"

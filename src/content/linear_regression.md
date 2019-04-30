@@ -1,5 +1,5 @@
 Title: 线性回归
-Date: 2019-04-25
+Date: 2019-04-30
 Slug: linear_regression
 Category: 机器学习
 Tags: 回归, 线性模型

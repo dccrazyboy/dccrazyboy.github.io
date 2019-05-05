@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en" itemscope itemtype="http://schema.org/Person">
+<head>
+  <meta charset="utf-8">
+  <!-- Site Meta Data -->
+  <title>线性代数基础</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="dongchao">
+
+  <link rel="shortcut icon" href="">
+
+  <!-- schema.org -->
+  <meta itemprop="name" content="dongchao.me">
+  <meta itemprop="image" content="">
+  <meta itemprop="description" content="">
+
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+  <!-- Style Meta Data -->
+  <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+  <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+
+  <!-- Feed Meta Data -->
+
+  <!-- Twitter Feed -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="">
+  <meta name="twitter:image" content="">
+
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <aside>
+    <!--<center><a href=""><img id="avatar" src=""></a></center>-->
+    <h1>dongchao.me</h1>
+    <br>
+
+
+    <nav class="nav">
+      <ul class="list-bare">
+      
+          <li><a class="nav__link" href="/">Home</a></li>
+         
+         
+      </ul>
+    </nav>
+
+    <p class="social">
+    </p>
+
+    <!--
+    <h2>Categories</h2>
+    <ul class="navbar">
+      <li><a href="/category/init.html">Init</a></li>
+      <li class="active"><a href="/category/ji-qi-xue-xi.html">机器学习</a></li>
+    </ul> 
+    -->
+  </aside>
+
+  <!-- Content -->
+  <article>
+<section id="content">
+    <article>
+        <h2 class="post_title post_detail"><a href="/linear_algebra.html" rel="bookmark" title="Permalink to 线性代数基础">线性代数基础</a></h2>
+        <div class="entry-content blog-post">
+            <h1>一、场景</h1>
+<p>线性代数简单来讲，是用来处理线性方程式相关的问题，从而让整个解法简单，容易理解。</p>
+<p>例如对于下面的3个线性方程：</p>
+<div class="math">$$y_1 = 1 + 2 * x_1 + 3 * x_2\\
+y_2 = 4 + 5 * x_1 + 6 * x_2\\
+y_3 = 7+ 8 * x_1 + 9 * x_2$$</div>
+<p>有如下样本数据：</p>
+<div class="math">$$
+x_1, x_2\\
+11,22\\
+33,44\\
+55,66\\
+77,88
+$$</div>
+<p>需要计算出各自的<span class="math">\(y_1, y_2, y_3\)</span></p>
+<p>如果按照常规的写法，可能类似于(python)：</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f1</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">x2</span>
+<span class="k">def</span> <span class="nf">f2</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">x2</span>
+<span class="k">def</span> <span class="nf">f3</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">7</span> <span class="o">+</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="mi">9</span> <span class="o">*</span> <span class="n">x2</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">22</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">33</span><span class="p">,</span><span class="mi">44</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">55</span><span class="p">,</span><span class="mi">66</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">77</span><span class="p">,</span><span class="mi">88</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+    <span class="n">x_reslut</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">[</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">,</span> <span class="n">f3</span><span class="p">]:</span>
+        <span class="n">x_reslut</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">))</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_reslut</span><span class="p">)</span>
+
+<span class="n">result</span>
+</pre></div>
+
+
+<p>结果是：</p>
+<div class="highlight"><pre><span></span><span class="p">[[</span><span class="mi">89</span><span class="p">,</span> <span class="mi">191</span><span class="p">,</span> <span class="mi">293</span><span class="p">],</span> <span class="p">[</span><span class="mi">199</span><span class="p">,</span> <span class="mi">433</span><span class="p">,</span> <span class="mi">667</span><span class="p">],</span> <span class="p">[</span><span class="mi">309</span><span class="p">,</span> <span class="mi">675</span><span class="p">,</span> <span class="mi">1041</span><span class="p">],</span> <span class="p">[</span><span class="mi">419</span><span class="p">,</span> <span class="mi">917</span><span class="p">,</span> <span class="mi">1415</span><span class="p">]]</span>
+</pre></div>
+
+
+<p>写法较为复杂，用线性代数方式，可以通过构造两个矩阵
+</p>
+<div class="math">$$
+X=
+\begin{bmatrix}
+1&amp;11&amp;22\\
+1&amp;33&amp;44\\
+1&amp;55&amp;66\\
+1&amp;77&amp;88
+\end{bmatrix}
+$$</div>
+<div class="math">$$
+Y=
+\begin{bmatrix}
+1&amp;4&amp;7\\
+2&amp;5&amp;8\\
+3&amp;6&amp;9
+\end{bmatrix}
+$$</div>
+<p>然后通过 <span class="math">\(X*Y\)</span> 就可以计算出所有的结果(python+numpy)</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">22</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">33</span><span class="p">,</span><span class="mi">44</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">55</span><span class="p">,</span><span class="mi">66</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">77</span><span class="p">,</span><span class="mi">88</span><span class="p">],</span>
+<span class="p">])</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span>
+<span class="p">])</span>
+<span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+</pre></div>
+
+
+<p>结果是：</p>
+<div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([[</span>  <span class="mi">89</span><span class="p">,</span>  <span class="mi">191</span><span class="p">,</span>  <span class="mi">293</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mi">199</span><span class="p">,</span>  <span class="mi">433</span><span class="p">,</span>  <span class="mi">667</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mi">309</span><span class="p">,</span>  <span class="mi">675</span><span class="p">,</span> <span class="mi">1041</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mi">419</span><span class="p">,</span>  <span class="mi">917</span><span class="p">,</span> <span class="mi">1415</span><span class="p">]])</span>
+</pre></div>
+
+
+<p>这种方式不仅写法较为简单，而且都是矩阵操作，执行性能也非常高。</p>
+<h1>二、基础概念</h1>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        fonts: [['STIX', 'TeX']]," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+        </div>
+        <div class="post_list">
+            <span>By </span>
+            <a href="/author/dongchao.html">@dongchao</a>
+            <span> in </span>
+            <span class="post_category"><a href="/category/ji-qi-xue-xi.html" rel="bookmark" title="Permalink to 机器学习">[ 机器学习 ]</a></span>
+            <span class="post_date">Sun 05 May 2019</span>
+            <div><span>Tags : </span>
+                <span><a href="/tag/xian-xing-dai-shu.html">#线性代数, </a></span>
+            </div>
+        </div>
+    </article>
+</section>
+  </article>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      Blog powered by <a href="http://getpelican.com/">Pelican</a>, 
+      which takes great advantage of <a href="http://python.org">Python</a>.
+      Theme <a href="https://github.com/parbhat/pelican-blue">Pelican-Blue</a> by <a href="https://parbhatpuri.com/">@parbhat</a>.
+    </p>
+  </footer>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-38402381-7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-38402381-7');
+  </script>
+
+</body>
+</html>

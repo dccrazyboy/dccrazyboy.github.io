@@ -155,7 +155,72 @@ $$</div>
 
 
 <p>这种方式不仅写法较为简单，而且都是矩阵操作，执行性能也非常高。</p>
-<h1>二、基础概念</h1>
+<h1>二、矩阵</h1>
+<p>一个<span class="math">\(m*n\)</span>的矩阵是一个由<span class="math">\(m\)</span>行（row）<span class="math">\(n\)</span>列（column）元素排列成的矩形阵列。矩阵里的元素可以是数字、符号或数学式。以下矩阵<span class="math">\(A\)</span>是一个由6个数字元素构成的2行3列的矩阵：</p>
+<div class="math">$$
+A=
+\begin{bmatrix}
+1&amp;2&amp;3\\
+4&amp;5&amp;6\\
+\end{bmatrix}
+$$</div>
+<p>矩阵的概念比较简单，就是以指定的形式排列数据。</p>
+<p>下面介绍几个特殊的矩阵：</p>
+<ol>
+<li>单位矩阵</li>
+</ol>
+<p>一个<span class="math">\(n\)</span>阶单位矩阵，是一个<span class="math">\(n*n\)</span>的方形矩阵，其主对角线元素为1，其余元素为0，单位矩阵以<span class="math">\(I_n\)</span>表示。例如：
+</p>
+<div class="math">$$
+I_1 = 
+\begin{bmatrix}
+1
+\end{bmatrix}
+$$</div>
+<div class="math">$$
+I_2 = 
+\begin{bmatrix}
+1&amp;0\\
+0&amp;1
+\end{bmatrix}
+$$</div>
+<div class="math">$$
+I_3 = 
+\begin{bmatrix}
+1&amp;0&amp;0\\
+0&amp;1&amp;0\\
+0&amp;0&amp;1
+\end{bmatrix}
+$$</div>
+<h1>三、矩阵操作</h1>
+<h2>3.1 矩阵加法</h2>
+<p>只有维度相同的矩阵才能计算加法，将对应位置的元素相加即可，例如</p>
+<div class="math">$$
+A=
+\begin{bmatrix}
+1&amp;2&amp;3\\
+4&amp;5&amp;6\\
+\end{bmatrix}
+$$</div>
+<div class="math">$$
+B=
+\begin{bmatrix}
+7&amp;8&amp;9\\
+0&amp;1&amp;2\\
+\end{bmatrix}
+$$</div>
+<div class="math">$$
+A+B=
+\begin{bmatrix}
+1+7&amp;2+8&amp;3+9\\
+4+0&amp;5+1&amp;6+2\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+8&amp;10&amp;12\\
+4&amp;6&amp;8\\
+\end{bmatrix}
+$$</div>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var align = "center",
         indent = "0em",

@@ -154,7 +154,7 @@ $$</div>
 </pre></div>
 
 
-<p>这种方式不仅写法较为简单，而且都是矩阵操作，执行性能也非常高。</p>
+<p>这种方式不仅写法较为简单，而且都是矩阵操作，执行性能也非常高（具体乘法是如何算的下面会讲）。</p>
 <h1>二、矩阵</h1>
 <p>一个<span class="math">\(m*n\)</span>的矩阵是一个由<span class="math">\(m\)</span>行（row）<span class="math">\(n\)</span>列（column）元素排列成的矩形阵列。矩阵里的元素可以是数字、符号或数学式。以下矩阵<span class="math">\(A\)</span>是一个由6个数字元素构成的2行3列的矩阵：</p>
 <div class="math">$$
@@ -221,6 +221,69 @@ A+B=
 4&amp;6&amp;8\\
 \end{bmatrix}
 $$</div>
+<h2>3.2 矩阵减法</h2>
+<p>矩阵减法与加法类似，对应位置元素相减即可，例如：</p>
+<div class="math">$$
+A=
+\begin{bmatrix}
+1&amp;2&amp;3\\
+4&amp;5&amp;6\\
+\end{bmatrix}
+$$</div>
+<div class="math">$$
+B=
+\begin{bmatrix}
+7&amp;8&amp;9\\
+0&amp;1&amp;2\\
+\end{bmatrix}
+$$</div>
+<div class="math">$$
+A-B=
+\begin{bmatrix}
+1-7&amp;2-8&amp;3-9\\
+4-0&amp;5-1&amp;6-2\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+-6&amp;-6&amp;-6\\
+4&amp;4&amp;4\\
+\end{bmatrix}
+$$</div>
+<h2>3.3 矩阵乘法</h2>
+<p>矩阵乘法比较特殊，两个矩阵相乘<span class="math">\(A*B\)</span>，需要矩阵<span class="math">\(A\)</span>的列数与矩阵<span class="math">\(B\)</span>和行数相同，即<span class="math">\(m*n\)</span>的矩阵只能和<span class="math">\(n*o\)</span>的矩阵相乘。</p>
+<p>相乘得到的矩阵<span class="math">\(C\)</span>，为矩阵<span class="math">\(A\)</span>的行数<span class="math">\(m\)</span>和矩阵<span class="math">\(B\)</span>的列数<span class="math">\(o\)</span>，即<span class="math">\(m*o\)</span>。</p>
+<p>矩阵<span class="math">\(C\)</span>的第<span class="math">\(i\)</span>行第<span class="math">\(j\)</span>列的元素等于矩阵<span class="math">\(A\)</span>的第<span class="math">\(i\)</span>行的元素与矩阵<span class="math">\(B\)</span>的第<span class="math">\(j\)</span>列对应元素乘积之和。</p>
+<p>例如：</p>
+<div class="math">$$
+A=
+\begin{bmatrix}
+1&amp;2&amp;3\\
+4&amp;5&amp;6
+\end{bmatrix}
+$$</div>
+<div class="math">$$
+B=
+\begin{bmatrix}
+11&amp;44\\
+22&amp;55\\
+33&amp;66
+\end{bmatrix}
+$$</div>
+<div class="math">$$
+A*B=
+\begin{bmatrix}
+1*11+2*22+3*33&amp;1*44+2*55+3*66\\
+4*11+5*22+6*33&amp;4*44+5*55+6*66
+\end{bmatrix}
+=
+\begin{bmatrix}
+154&amp;352\\
+352&amp;847
+\end{bmatrix}
+$$</div>
+<h2>3.3 矩阵除法</h2>
+<p>矩阵除法一般叫为求逆矩阵，即对于方阵<span class="math">\(A\)</span>(<span class="math">\(n*n\)</span>)，求另一个矩阵<span class="math">\(B\)</span>(<span class="math">\(n*n\)</span>)，满足<span class="math">\(A*B=I_n\)</span>。</p>
+<p>一般会用</p>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var align = "center",
         indent = "0em",

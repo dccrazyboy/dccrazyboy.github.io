@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en" itemscope itemtype="http://schema.org/Person">
+<head>
+  <meta charset="utf-8">
+  <!-- Site Meta Data -->
+  <title>线性代数基础</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="dongchao">
+
+  <link rel="shortcut icon" href="">
+
+  <!-- schema.org -->
+  <meta itemprop="name" content="dongchao.me">
+  <meta itemprop="image" content="">
+  <meta itemprop="description" content="">
+
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+  <!-- Style Meta Data -->
+  <link rel="stylesheet" href="/theme/css/style.css" type="text/css" />
+  <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+
+  <!-- Feed Meta Data -->
+
+  <!-- Twitter Feed -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="">
+  <meta name="twitter:image" content="">
+
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <aside>
+    <!--<center><a href=""><img id="avatar" src=""></a></center>-->
+    <h1>dongchao.me</h1>
+    <br>
+
+
+    <nav class="nav">
+      <ul class="list-bare">
+      
+          <li><a class="nav__link" href="/">Home</a></li>
+         
+         
+      </ul>
+    </nav>
+
+    <p class="social">
+    </p>
+
+    <!--
+    <h2>Categories</h2>
+    <ul class="navbar">
+      <li><a href="/category/init.html">Init</a></li>
+      <li class="active"><a href="/category/ji-qi-xue-xi.html">机器学习</a></li>
+    </ul> 
+    -->
+  </aside>
+
+  <!-- Content -->
+  <article>
+<section id="content">
+    <article>
+        <h2 class="post_title post_detail"><a href="/linear_algebra.html" rel="bookmark" title="Permalink to 线性代数基础">线性代数基础</a></h2>
+        <div class="entry-content blog-post">
+            <h1>一、场景</h1>
+<p>线性代数简单来讲，是用来处理线性方程式相关的问题，从而让整个解法简单，容易理解。</p>
+<p>例如对于下面的3个线性方程：</p>
+<div class="math">$$y_1 = 1 + 2 * x_1 + 3 * x_2\\
+y_2 = 4 + 5 * x_1 + 6 * x_2\\
+y_3 = 7+ 8 * x_1 + 9 * x_2$$</div>
+<p>有如下样本数据：</p>
+<div class="math">$$
+x_1, x_2\\
+11,22\\
+33,44\\
+55,66\\
+77,88
+$$</div>
+<p>需要计算出各自的<span class="math">\(y_1, y_2, y_3\)</span></p>
+<p>如果按照常规的写法，可能类似于(python)：</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f1</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">x2</span>
+<span class="k">def</span> <span class="nf">f2</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">x2</span>
+<span class="k">def</span> <span class="nf">f3</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">7</span> <span class="o">+</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="mi">9</span> <span class="o">*</span> <span class="n">x2</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">22</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">33</span><span class="p">,</span><span class="mi">44</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">55</span><span class="p">,</span><span class="mi">66</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">77</span><span class="p">,</span><span class="mi">88</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+    <span class="n">x_reslut</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">[</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">,</span> <span class="n">f3</span><span class="p">]:</span>
+        <span class="n">x_reslut</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">))</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_reslut</span><span class="p">)</span>
+
+<span class="n">result</span>
+</pre></div>
+
+
+<p>结果是：</p>
+<div class="highlight"><pre><span></span><span class="p">[[</span><span class="mi">89</span><span class="p">,</span> <span class="mi">191</span><span class="p">,</span> <span class="mi">293</span><span class="p">],</span> <span class="p">[</span><span class="mi">199</span><span class="p">,</span> <span class="mi">433</span><span class="p">,</span> <span class="mi">667</span><span class="p">],</span> <span class="p">[</span><span class="mi">309</span><span class="p">,</span> <span class="mi">675</span><span class="p">,</span> <span class="mi">1041</span><span class="p">],</span> <span class="p">[</span><span class="mi">419</span><span class="p">,</span> <span class="mi">917</span><span class="p">,</span> <span class="mi">1415</span><span class="p">]]</span>
+</pre></div>
+
+
+<p>写法较为复杂，用线性代数方式，可以通过构造两个矩阵
+</p>
+<div class="math">$$
+X=
+\begin{bmatrix}
+1&amp;11&amp;22\\
+1&amp;33&amp;44\\
+1&amp;55&amp;66\\
+1&amp;77&amp;88
+\end{bmatrix}
+$$</div>
+<div class="math">$$
+Y=
+\begin{bmatrix}
+1&amp;4&amp;7\\
+2&amp;5&amp;8\\
+3&amp;6&amp;9
+\end{bmatrix}
+$$</div>
+<p>然后通过 <span class="math">\(X*Y\)</span> 就可以计算出所有的结果(python+numpy)</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">22</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">33</span><span class="p">,</span><span class="mi">44</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">55</span><span class="p">,</span><span class="mi">66</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">77</span><span class="p">,</span><span class="mi">88</span><span class="p">],</span>
+<span class="p">])</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span>
+<span class="p">])</span>
+<span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+</pre></div>
+
+
+<p>结果是：</p>
+<div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([[</span>  <span class="mi">89</span><span class="p">,</span>  <span class="mi">191</span><span class="p">,</span>  <span class="mi">293</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mi">199</span><span class="p">,</span>  <span class="mi">433</span><span class="p">,</span>  <span class="mi">667</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mi">309</span><span class="p">,</span>  <span class="mi">675</span><span class="p">,</span> <span class="mi">1041</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mi">419</span><span class="p">,</span>  <span class="mi">917</span><span class="p">,</span> <span class="mi">1415</span><span class="p">]])</span>
+</pre></div>
+
+
+<p>这种方式不仅写法较为简单，而且都是矩阵操作，执行性能也非常高（具体乘法是如何算的下面会讲）。</p>
+<h1>二、矩阵</h1>
+<p>一个<span class="math">\(m*n\)</span>的矩阵是一个由<span class="math">\(m\)</span>行（row）<span class="math">\(n\)</span>列（column）元素排列成的矩形阵列。矩阵里的元素可以是数字、符号或数学式。以下矩阵<span class="math">\(A\)</span>是一个由6个数字元素构成的2行3列的矩阵：</p>
+<div class="math">$$
+A=
+\begin{bmatrix}
+1&amp;2&amp;3\\
+4&amp;5&amp;6\\
+\end{bmatrix}
+$$</div>
+<p>矩阵的概念比较简单，就是以指定的形式排列数据。</p>
+<p>下面介绍几个特殊的矩阵：</p>
+<ol>
+<li>单位矩阵</li>
+</ol>
+<p>一个<span class="math">\(n\)</span>阶单位矩阵，是一个<span class="math">\(n*n\)</span>的方形矩阵，其主对角线元素为1，其余元素为0，单位矩阵以<span class="math">\(I_n\)</span>表示。例如：
+</p>
+<div class="math">$$
+I_1 = 
+\begin{bmatrix}
+1
+\end{bmatrix}
+$$</div>
+<div class="math">$$
+I_2 = 
+\begin{bmatrix}
+1&amp;0\\
+0&amp;1
+\end{bmatrix}
+$$</div>
+<div class="math">$$
+I_3 = 
+\begin{bmatrix}
+1&amp;0&amp;0\\
+0&amp;1&amp;0\\
+0&amp;0&amp;1
+\end{bmatrix}
+$$</div>
+<h1>三、矩阵操作</h1>
+<h2>3.1 矩阵加法</h2>
+<p>只有维度相同的矩阵才能计算加法，将对应位置的元素相加即可，例如</p>
+<div class="math">$$
+A=
+\begin{bmatrix}
+1&amp;2&amp;3\\
+4&amp;5&amp;6\\
+\end{bmatrix}
+$$</div>
+<div class="math">$$
+B=
+\begin{bmatrix}
+7&amp;8&amp;9\\
+0&amp;1&amp;2\\
+\end{bmatrix}
+$$</div>
+<div class="math">$$
+A+B=
+\begin{bmatrix}
+1+7&amp;2+8&amp;3+9\\
+4+0&amp;5+1&amp;6+2\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+8&amp;10&amp;12\\
+4&amp;6&amp;8\\
+\end{bmatrix}
+$$</div>
+<h2>3.2 矩阵减法</h2>
+<p>矩阵减法与加法类似，对应位置元素相减即可，例如：</p>
+<div class="math">$$
+A=
+\begin{bmatrix}
+1&amp;2&amp;3\\
+4&amp;5&amp;6\\
+\end{bmatrix}
+$$</div>
+<div class="math">$$
+B=
+\begin{bmatrix}
+7&amp;8&amp;9\\
+0&amp;1&amp;2\\
+\end{bmatrix}
+$$</div>
+<div class="math">$$
+A-B=
+\begin{bmatrix}
+1-7&amp;2-8&amp;3-9\\
+4-0&amp;5-1&amp;6-2\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+-6&amp;-6&amp;-6\\
+4&amp;4&amp;4\\
+\end{bmatrix}
+$$</div>
+<h2>3.3 矩阵乘法</h2>
+<p>矩阵乘法比较特殊，两个矩阵相乘<span class="math">\(A*B\)</span>，需要矩阵<span class="math">\(A\)</span>的列数与矩阵<span class="math">\(B\)</span>和行数相同，即<span class="math">\(m*n\)</span>的矩阵只能和<span class="math">\(n*o\)</span>的矩阵相乘。</p>
+<p>相乘得到的矩阵<span class="math">\(C\)</span>，为矩阵<span class="math">\(A\)</span>的行数<span class="math">\(m\)</span>和矩阵<span class="math">\(B\)</span>的列数<span class="math">\(o\)</span>，即<span class="math">\(m*o\)</span>。</p>
+<p>矩阵<span class="math">\(C\)</span>的第<span class="math">\(i\)</span>行第<span class="math">\(j\)</span>列的元素等于矩阵<span class="math">\(A\)</span>的第<span class="math">\(i\)</span>行的元素与矩阵<span class="math">\(B\)</span>的第<span class="math">\(j\)</span>列对应元素乘积之和。</p>
+<p>例如：</p>
+<div class="math">$$
+A=
+\begin{bmatrix}
+1&amp;2&amp;3\\
+4&amp;5&amp;6
+\end{bmatrix}
+$$</div>
+<div class="math">$$
+B=
+\begin{bmatrix}
+11&amp;44\\
+22&amp;55\\
+33&amp;66
+\end{bmatrix}
+$$</div>
+<div class="math">$$
+A*B=
+\begin{bmatrix}
+1*11+2*22+3*33&amp;1*44+2*55+3*66\\
+4*11+5*22+6*33&amp;4*44+5*55+6*66
+\end{bmatrix}
+=
+\begin{bmatrix}
+154&amp;352\\
+352&amp;847
+\end{bmatrix}
+$$</div>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span>
+<span class="p">])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">11</span><span class="p">,</span><span class="mi">44</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">22</span><span class="p">,</span><span class="mi">55</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">33</span><span class="p">,</span><span class="mi">66</span><span class="p">],</span>
+<span class="p">])</span>
+<span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([[</span><span class="mi">154</span><span class="p">,</span> <span class="mi">352</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">352</span><span class="p">,</span> <span class="mi">847</span><span class="p">]])</span>
+</pre></div>
+
+
+<h2>3.4 矩阵除法</h2>
+<p>矩阵除法一般叫为求逆矩阵，即对于方阵<span class="math">\(A\)</span>(<span class="math">\(n*n\)</span>)，求另一个矩阵<span class="math">\(B\)</span>(<span class="math">\(n*n\)</span>)，满足<span class="math">\(A*B=I_n\)</span>。</p>
+<p>这里简单介绍一下用初等行变换求矩阵的逆，初等行变换有三种操作：</p>
+<ol>
+<li>两行（列）互换</li>
+<li>把某行（列）乘以一非零常数</li>
+<li>把第i行（列）加上第j行（列）的k倍</li>
+</ol>
+<p>其计算过程如下：</p>
+<ol>
+<li>作一个<span class="math">\(n*2n\)</span>的矩阵<span class="math">\([A，I_n]\)</span></li>
+<li>通过初等行变化，将该矩阵变换为<span class="math">\([I_n, B]\)</span></li>
+<li>此时矩阵<span class="math">\(B\)</span>就是<span class="math">\(A\)</span>的逆矩阵</li>
+</ol>
+<p>例如对于矩阵
+</p>
+<div class="math">$$
+A=
+\begin{bmatrix}
+2&amp;3&amp;1\\
+0&amp;1&amp;3\\
+1&amp;2&amp;5
+\end{bmatrix}
+$$</div>
+<p>通过如下变化</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mat</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span>
+<span class="p">])</span>
+<span class="k">print</span> <span class="s1">&#39;A: &#39;</span>
+<span class="k">print</span> <span class="n">A</span>
+
+<span class="k">print</span> <span class="s1">&#39;target: &#39;</span>
+<span class="k">print</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="s1">&#39;solve: &#39;</span>
+<span class="k">print</span> <span class="n">A</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">A</span><span class="p">,</span>  <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)],</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">A</span>
+<span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span> <span class="o">/</span> <span class="mf">2.0</span> 
+<span class="k">print</span> <span class="n">A</span>
+
+<span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">,:]</span> <span class="o">-</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span>
+<span class="k">print</span> <span class="n">A</span>
+
+<span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">,:]</span> <span class="o">-</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span>
+<span class="k">print</span> <span class="n">A</span>
+
+<span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">,:]</span> <span class="o">/</span> <span class="mf">3.0</span>
+<span class="k">print</span> <span class="n">A</span>
+
+<span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">-</span> <span class="mf">3.0</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">,:]</span>
+<span class="k">print</span> <span class="n">A</span>
+
+<span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span> <span class="o">-</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">,:]</span>
+<span class="k">print</span> <span class="n">A</span>
+
+<span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span> <span class="o">-</span> <span class="mf">1.5</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span>
+<span class="k">print</span> <span class="n">A</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">A</span><span class="p">:</span> 
+<span class="p">[[</span><span class="mi">2</span> <span class="mi">3</span> <span class="mi">1</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">3</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">5</span><span class="p">]]</span>
+<span class="n">target</span><span class="p">:</span> 
+<span class="p">[[</span><span class="o">-</span><span class="mf">0.16666667</span> <span class="o">-</span><span class="mf">2.16666667</span>  <span class="mf">1.33333333</span><span class="p">]</span>
+ <span class="p">[</span> <span class="mf">0.5</span>         <span class="mf">1.5</span>        <span class="o">-</span><span class="mf">1.</span>        <span class="p">]</span>
+ <span class="p">[</span><span class="o">-</span><span class="mf">0.16666667</span> <span class="o">-</span><span class="mf">0.16666667</span>  <span class="mf">0.33333333</span><span class="p">]]</span>
+<span class="n">solve</span><span class="p">:</span> 
+<span class="p">[[</span><span class="mi">2</span> <span class="mi">3</span> <span class="mi">1</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">3</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">5</span><span class="p">]]</span>
+<span class="p">[[</span><span class="mf">2.</span> <span class="mf">3.</span> <span class="mf">1.</span> <span class="mf">1.</span> <span class="mf">0.</span> <span class="mf">0.</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">0.</span> <span class="mf">1.</span> <span class="mf">3.</span> <span class="mf">0.</span> <span class="mf">1.</span> <span class="mf">0.</span><span class="p">]</span>
+ <span class="p">[</span><span class="mf">1.</span> <span class="mf">2.</span> <span class="mf">5.</span> <span class="mf">0.</span> <span class="mf">0.</span> <span class="mf">1.</span><span class="p">]]</span>
+<span class="p">[[</span><span class="mf">1.</span>  <span class="mf">1.5</span> <span class="mf">0.5</span> <span class="mf">0.5</span> <span class="mf">0.</span>  <span class="mf">0.</span> <span class="p">]</span>
+ <span class="p">[</span><span class="mf">0.</span>  <span class="mf">1.</span>  <span class="mf">3.</span>  <span class="mf">0.</span>  <span class="mf">1.</span>  <span class="mf">0.</span> <span class="p">]</span>
+ <span class="p">[</span><span class="mf">1.</span>  <span class="mf">2.</span>  <span class="mf">5.</span>  <span class="mf">0.</span>  <span class="mf">0.</span>  <span class="mf">1.</span> <span class="p">]]</span>
+<span class="p">[[</span> <span class="mf">1.</span>   <span class="mf">1.5</span>  <span class="mf">0.5</span>  <span class="mf">0.5</span>  <span class="mf">0.</span>   <span class="mf">0.</span> <span class="p">]</span>
+ <span class="p">[</span> <span class="mf">0.</span>   <span class="mf">1.</span>   <span class="mf">3.</span>   <span class="mf">0.</span>   <span class="mf">1.</span>   <span class="mf">0.</span> <span class="p">]</span>
+ <span class="p">[</span> <span class="mf">0.</span>   <span class="mf">0.5</span>  <span class="mf">4.5</span> <span class="o">-</span><span class="mf">0.5</span>  <span class="mf">0.</span>   <span class="mf">1.</span> <span class="p">]]</span>
+<span class="p">[[</span> <span class="mf">1.</span>   <span class="mf">1.5</span>  <span class="mf">0.5</span>  <span class="mf">0.5</span>  <span class="mf">0.</span>   <span class="mf">0.</span> <span class="p">]</span>
+ <span class="p">[</span> <span class="mf">0.</span>   <span class="mf">1.</span>   <span class="mf">3.</span>   <span class="mf">0.</span>   <span class="mf">1.</span>   <span class="mf">0.</span> <span class="p">]</span>
+ <span class="p">[</span> <span class="mf">0.</span>   <span class="mf">0.</span>   <span class="mf">3.</span>  <span class="o">-</span><span class="mf">0.5</span> <span class="o">-</span><span class="mf">0.5</span>  <span class="mf">1.</span> <span class="p">]]</span>
+<span class="p">[[</span> <span class="mf">1.</span>          <span class="mf">1.5</span>         <span class="mf">0.5</span>         <span class="mf">0.5</span>         <span class="mf">0.</span>          <span class="mf">0.</span>        <span class="p">]</span>
+ <span class="p">[</span> <span class="mf">0.</span>          <span class="mf">1.</span>          <span class="mf">3.</span>          <span class="mf">0.</span>          <span class="mf">1.</span>          <span class="mf">0.</span>        <span class="p">]</span>
+ <span class="p">[</span> <span class="mf">0.</span>          <span class="mf">0.</span>          <span class="mf">1.</span>         <span class="o">-</span><span class="mf">0.16666667</span> <span class="o">-</span><span class="mf">0.16666667</span>  <span class="mf">0.33333333</span><span class="p">]]</span>
+<span class="p">[[</span> <span class="mf">1.</span>          <span class="mf">1.5</span>         <span class="mf">0.5</span>         <span class="mf">0.5</span>         <span class="mf">0.</span>          <span class="mf">0.</span>        <span class="p">]</span>
+ <span class="p">[</span> <span class="mf">0.</span>          <span class="mf">1.</span>          <span class="mf">0.</span>          <span class="mf">0.5</span>         <span class="mf">1.5</span>        <span class="o">-</span><span class="mf">1.</span>        <span class="p">]</span>
+ <span class="p">[</span> <span class="mf">0.</span>          <span class="mf">0.</span>          <span class="mf">1.</span>         <span class="o">-</span><span class="mf">0.16666667</span> <span class="o">-</span><span class="mf">0.16666667</span>  <span class="mf">0.33333333</span><span class="p">]]</span>
+<span class="p">[[</span> <span class="mf">1.</span>          <span class="mf">1.5</span>         <span class="mf">0.</span>          <span class="mf">0.58333333</span>  <span class="mf">0.08333333</span> <span class="o">-</span><span class="mf">0.16666667</span><span class="p">]</span>
+ <span class="p">[</span> <span class="mf">0.</span>          <span class="mf">1.</span>          <span class="mf">0.</span>          <span class="mf">0.5</span>         <span class="mf">1.5</span>        <span class="o">-</span><span class="mf">1.</span>        <span class="p">]</span>
+ <span class="p">[</span> <span class="mf">0.</span>          <span class="mf">0.</span>          <span class="mf">1.</span>         <span class="o">-</span><span class="mf">0.16666667</span> <span class="o">-</span><span class="mf">0.16666667</span>  <span class="mf">0.33333333</span><span class="p">]]</span>
+<span class="p">[[</span> <span class="mf">1.</span>          <span class="mf">0.</span>          <span class="mf">0.</span>         <span class="o">-</span><span class="mf">0.16666667</span> <span class="o">-</span><span class="mf">2.16666667</span>  <span class="mf">1.33333333</span><span class="p">]</span>
+ <span class="p">[</span> <span class="mf">0.</span>          <span class="mf">1.</span>          <span class="mf">0.</span>          <span class="mf">0.5</span>         <span class="mf">1.5</span>        <span class="o">-</span><span class="mf">1.</span>        <span class="p">]</span>
+ <span class="p">[</span> <span class="mf">0.</span>          <span class="mf">0.</span>          <span class="mf">1.</span>         <span class="o">-</span><span class="mf">0.16666667</span> <span class="o">-</span><span class="mf">0.16666667</span>  <span class="mf">0.33333333</span><span class="p">]]</span>
+</pre></div>
+
+
+<p>可以得到其逆矩阵
+</p>
+<div class="math">$$
+B=
+\begin{bmatrix}
+-0.16666667&amp;-2.16666667&amp;1.33333333\\
+0.5&amp;1.5&amp;-1.\\
+-0.16666667&amp;-0.16666667&amp;0.33333333
+\end{bmatrix}
+$$</div>
+<h2>3.5 矩阵转置</h2>
+<p>矩阵转置是指将矩阵按照对角线交换位置，简单来讲，就是将原矩阵<span class="math">\(A\)</span>逐行变成逐列，记做<span class="math">\(A^T\)</span>，例如：</p>
+<div class="math">$$
+A=
+\begin{bmatrix}
+1&amp;2&amp;3\\
+4&amp;5&amp;6
+\end{bmatrix}
+$$</div>
+<div class="math">$$
+A^T=
+\begin{bmatrix}
+1&amp;4\\
+2&amp;5\\
+3&amp;6
+\end{bmatrix}
+$$</div>
+<p>参考：</p>
+<ol>
+<li>https://zh.wikipedia.org/wiki/%E5%88%9D%E7%AD%89%E7%9F%A9%E9%98%B5</li>
+</ol>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        fonts: [['STIX', 'TeX']]," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+        </div>
+        <div class="post_list">
+            <span>By </span>
+            <a href="/author/dongchao.html">@dongchao</a>
+            <span> in </span>
+            <span class="post_category"><a href="/category/ji-qi-xue-xi.html" rel="bookmark" title="Permalink to 机器学习">[ 机器学习 ]</a></span>
+            <span class="post_date">Sun 05 May 2019</span>
+            <div><span>Tags : </span>
+                <span><a href="/tag/xian-xing-dai-shu.html">#线性代数, </a></span>
+            </div>
+        </div>
+    </article>
+</section>
+  </article>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      Blog powered by <a href="http://getpelican.com/">Pelican</a>, 
+      which takes great advantage of <a href="http://python.org">Python</a>.
+      Theme <a href="https://github.com/parbhat/pelican-blue">Pelican-Blue</a> by <a href="https://parbhatpuri.com/">@parbhat</a>.
+    </p>
+  </footer>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-38402381-7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-38402381-7');
+  </script>
+
+</body>
+</html>
